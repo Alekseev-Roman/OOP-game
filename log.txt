@@ -1,0 +1,20 @@
+File log started
+Entity (0; 0) moved to (0; 1)
+Entity (0; 1) take booster
+Entity (0; 1) moved to (0; 2)
+Entity (0; 2) moved to (0; 3)
+Entity (0; 3) moved to (0; 2)
+Entity (0; 2) moved to (0; 1)
+Entity (0; 1) moved to (0; 0)
+Entity (0; 0) moved to (0; 1)
+Entity (0; 1) moved to (0; 2)
+Entity (0; 2) moved to (0; 3)
+Entity (0; 3) moved to (0; 2)
+Entity (0; 2) moved to (0; 1)
+Entity (0; 1) moved to (0; 0)
+Entity (0; 0) moved to (0; 1)
+Entity (0; 1) moved to (0; 2)
+Entity (0; 2) moved to (0; 3)
+Entity (0; 3) moved to (0; 2)
+Entity (0; 2) moved to (0; 1)
+File log finished
