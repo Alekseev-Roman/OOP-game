@@ -1,0 +1,31 @@
+#define CELL_TEXTURE "../texture/cell.png"
+
+#define START_TEXTURE "../texture/start.png"
+#define FINISH_TEXTURE "../texture/finish.png"
+
+#define WALL_ANGLE_LB_TEXTURE "../texture/wall_angle_left_bottom.png"
+#define WALL_ANGLE_LT_TEXTURE "../texture/wall_angle_left_top.png"
+#define WALL_ANGLE_RB_TEXTURE "../texture/wall_angle_right_bottom.png"
+#define WALL_ANGLE_RT_TEXTURE "../texture/wall_angle_right_top.png"
+
+#define WALL_CROSSING_TEXTURE "../texture/wall_crossing.png"
+
+#define WALL_END_L_TEXTURE "../texture/wall_end_left.png"
+#define WALL_END_R_TEXTURE "../texture/wall_end_right.png"
+#define WALL_END_T_TEXTURE "../texture/wall_end_top.png"
+#define WALL_END_B_TEXTURE "../texture/wall_end_bottom.png"
+
+#define WALL_STRAIGHT_V_TEXTURE "../texture/wall_straight_vertical.png"
+#define WALL_STRAIGHT_H_TEXTURE "../texture/wall_straight_horizontal.png"
+
+#define PLAYER_TEXTURE "../texture/player.png"
+
+#define SLIME_TEXTURE "../texture/slime.png"
+#define PARASITE_TEXTURE "../texture/parasite.png"
+#define INFECTED_ASTRONAUT_TEXTURE "../texture/infected_astronaut.png"
+
+#define HEALER_TEXTURE "../texture/healer.png"
+#define ARMOR_TEXTURE "../texture/armor.png"
+#define DAMAGE_TEXTURE "../texture/damage.png"
+
+#define PASS_TEXTURE "../texture/pass.png"
