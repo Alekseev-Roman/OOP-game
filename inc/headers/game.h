@@ -8,6 +8,9 @@
 #include "logger/logger_terminal.h"
 #include "logger/logger_file.h"
 #include "../interfaces/logger.h"
+#include "handler/handler_SFML.h"
+#include "handler/game_handler.h"
+#include "handler/player_handler.h"
 #include "painter_SFML.h"
 #include "builders/builder_fields.h"
 #include "builders/builder_entity.h"
@@ -36,8 +39,11 @@ private:
 	bool check_all_rules(Rules... args) const;
 	Field field;
 	std::shared_ptr<Painter> painter;
+	std::shared_ptr<sf::RenderWindow> window;
 	std::set<std::shared_ptr<Cell_element>> objects_game;
 	std::set<std::shared_ptr<Logger>> loggers;
+	std::unique_ptr<Handler> sfml_handler;
+	std::shared_ptr<Command_handler> command_handler;
 	size_t passes = 0;
 	size_t killed_enemies = 0;
 };
@@ -45,9 +51,14 @@ private:
 template <typename... Rules>
 Game<Rules...>::Game():
 	field(10, 15){
-		auto paint = std::make_shared<Painter_SFML>(650, 975, "Game");
+		window = std::make_shared<sf::RenderWindow>(sf::VideoMode(975, 650), "Game");
+		auto paint = std::make_shared<Painter_SFML>(650, 975, window);
 		painter = paint;
 		painter->set_field(field);
+
+		sfml_handler = std::make_unique<Handler_SFML>(window);
+		command_handler = std::make_shared<Game_handler>(*this);
+		sfml_handler->set_next(command_handler);
 
 		auto logger_terminal = std::make_shared<Logger_terminal>();
 		auto logger_first_file = std::make_shared<Logger_file>("../log.txt");
@@ -65,6 +76,8 @@ void Game<Rules...>::start(){
     auto cur = stamp;
 	while(painter->check_window()){
     	stamp = std::chrono::steady_clock::now();
+    	sfml_handler->process_command();
+
     	for (auto& obj : objects_game) {        
     	    obj->update();
     	}
@@ -73,7 +86,7 @@ void Game<Rules...>::start(){
             painter->paint_window();
     	    cur = std::chrono::steady_clock::now();
         	diff_seconds = cur - stamp;
-        } while (diff_seconds.count() < 1.5);		
+        } while (diff_seconds.count() < 1);	
 	}
 }
 
@@ -98,7 +111,7 @@ void Game<Rules...>::creater(std::shared_ptr<Painter_SFML> paint){
 	field = builder_f.create(field, painter, *this);
 
 	Builder_entity builder_e;
-	objects_game = builder_e.create_player(field, paint, painter, loggers, objects_game, *this);
+	objects_game = builder_e.create_player(field, paint, painter, loggers, objects_game, *this, command_handler);
 	objects_game = builder_e.create_enemy(field, paint, painter, objects_game, *this);
 
 	Builder_boosters  builder_b;

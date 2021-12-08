@@ -41,7 +41,7 @@ std::set<std::shared_ptr<Cell_element>> Builder_entity::create_enemy(Field& fiel
 	auto astronaut_second = std::make_shared<Infected_astronaut>(13, 9, 100, 20, 20, game);
 	painter->set_element(INFECTED_ASTRONAUT_TEXTURE, *astronaut_second);
 	astronaut_second->subscribe(paint);
-	game.get_cell(14, 9).set_element(astronaut_second);
+	game.get_cell(13, 9).set_element(astronaut_second);
 	astronaut_second->set_strategy(std::make_unique<Vertical_strategy>());
 	objects_game.insert(astronaut_second);
 
@@ -49,7 +49,7 @@ std::set<std::shared_ptr<Cell_element>> Builder_entity::create_enemy(Field& fiel
 }
 
 std::set<std::shared_ptr<Cell_element>> Builder_entity::create_player(Field& field, std::shared_ptr<Painter_SFML> paint, std::shared_ptr<Painter> painter,
-	std::set<std::shared_ptr<Logger>> loggers, std::set<std::shared_ptr<Cell_element>>  objects_game, Game_i& game){
+	std::set<std::shared_ptr<Logger>> loggers, std::set<std::shared_ptr<Cell_element>>  objects_game, Game_i& game, std::shared_ptr<Command_handler>& c_handler){
 	auto player = std::make_shared<Player>(0, 0, 100, 15, 100, game);
 	painter->set_element(PLAYER_TEXTURE, *player);
 	for(auto& log : loggers){        
@@ -58,5 +58,6 @@ std::set<std::shared_ptr<Cell_element>> Builder_entity::create_player(Field& fie
 	player->subscribe(paint);
 	game.get_cell(0, 0).set_element(player);
 	objects_game.insert(player);
+	c_handler->set_next(player->get_command_handler());
 	return objects_game;
 }
