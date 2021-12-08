@@ -8,7 +8,7 @@
 
 class Painter_SFML:public Painter, public Basic_signal_input{
 public:
-	Painter_SFML(int height_window, int width_window, const std::string& name_window);
+	Painter_SFML(int height_window, int width_window, const std::shared_ptr<sf::RenderWindow>& w);
 	void set_field(const Field& field);
 	void paint_cell(const std::string& cell_texture, int x, int y);
 	sf::Texture& get_texture(const std::string& name_texture);
@@ -27,7 +27,7 @@ private:
 	using sprite_ptr = std::unique_ptr<sf::Sprite[]>;
 	using sprite_ptr_ptr = std::unique_ptr<sprite_ptr[]>;
 	sprite_ptr_ptr arr_sprite;
-	sf::RenderWindow window;
+	std::shared_ptr<sf::RenderWindow> window;
 	int height;
 	int width;
 	int side_cell;

@@ -51,8 +51,8 @@ Field& Builder_fields::create(Field& field, std::shared_ptr<Painter> painter, Ga
 	field.set_cell(std::make_unique<Start_cell>(), 0, 0);
 	painter->paint_cell(START_TEXTURE, 0, 0);
 
-	field.set_cell(std::make_unique<Finish_cell>(game), 0, 3);
-	painter->paint_cell(FINISH_TEXTURE, 0, 3);
+	field.set_cell(std::make_unique<Finish_cell>(game), 14, 9);
+	painter->paint_cell(FINISH_TEXTURE, 14, 9);
 
 	return field;
 }

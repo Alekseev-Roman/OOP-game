@@ -15,28 +15,28 @@ std::set<std::shared_ptr<Cell_element>> Builder_boosters::create(Field& field, s
 	game.get_cell(13, 0).set_element(healer_second);
 	objects_game.insert(healer_second);
 
-	auto armor_first = std::make_shared<Healer_booster>(5, 9, 25, game);
+	auto armor_first = std::make_shared<Armor_booster>(5, 9, 25, game);
 	painter->set_element(ARMOR_TEXTURE, *armor_first);
 	armor_first->subscribe(paint);
 	game.get_cell(5, 9).set_element(armor_first);
 	objects_game.insert(armor_first);
 
-	auto damage_first = std::make_shared<Healer_booster>(3, 0, 25, game);
+	auto damage_first = std::make_shared<Damage_booster>(3, 0, 25, game);
 	painter->set_element(DAMAGE_TEXTURE, *damage_first);
 	damage_first->subscribe(paint);
-	game.get_cell(9, 5).set_element(damage_first);
+	game.get_cell(3, 0).set_element(damage_first);
 	objects_game.insert(damage_first);
 
-	auto damage_second = std::make_shared<Healer_booster>(9, 5, 25, game);
+	auto damage_second = std::make_shared<Damage_booster>(9, 5, 25, game);
 	painter->set_element(DAMAGE_TEXTURE, *damage_second);
 	damage_second->subscribe(paint);
 	game.get_cell(9, 5).set_element(damage_second);
 	objects_game.insert(damage_second);
 
-	auto pass = std::make_shared<Pass>(0, 2, game);
+	auto pass = std::make_shared<Pass>(7, 5, game);
 	painter->set_element(PASS_TEXTURE, *pass);
 	pass->subscribe(paint);
-	game.get_cell(0, 2).set_element(pass);
+	game.get_cell(7, 5).set_element(pass);
 	objects_game.insert(pass);
 
 	return objects_game;

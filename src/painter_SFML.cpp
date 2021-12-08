@@ -1,10 +1,8 @@
 #include "../inc/headers/painter_SFML.h"
 
 
-Painter_SFML::Painter_SFML(int height_window, int width_window, const std::string& name_window):
-	height(height_window), width(width_window){
-	window.create(sf::VideoMode(width_window, height_window), name_window);
-}
+Painter_SFML::Painter_SFML(int height_window, int width_window, const std::shared_ptr<sf::RenderWindow>& w):
+	height(height_window), width(width_window), window{w} {}
 
 void Painter_SFML::set_field(const Field& field){
 	height_field = field.get_height();
@@ -34,36 +32,36 @@ sf::Texture& Painter_SFML::get_texture(const std::string& name_texture){
 }
 
 void Painter_SFML::paint_window(){
-	window.clear();
+	window->clear();
 	paint_field();
 	paint_cell_elements();
-	window.display();
-
+	window->display();
+/*
 	sf::Event event;
-	while (window.pollEvent(event)){
+	while (window->pollEvent(event)){
     	if (event.type == sf::Event::Closed){
-            window.close();
+            window->close();
             break;
         }
-	}
+	}*/
 }
 
 void Painter_SFML::paint_cell_elements(){
 	for(auto& [key, val] : sprites){
-        window.draw(val);
+        window->draw(val);
     }
 }
 
 void Painter_SFML::paint_field(){
 	for(int i = 0; i < height_field; i++){
 		for(int e = 0; e < width_field; e++){
-			window.draw(arr_sprite[i][e]);
+			window->draw(arr_sprite[i][e]);
 		}
 	}
 }
 
 bool Painter_SFML::check_window(){
-	return window.isOpen();
+	return window->isOpen();
 }
 
 void Painter_SFML::signal_move(Cell_element& element, int new_x, int new_y){
